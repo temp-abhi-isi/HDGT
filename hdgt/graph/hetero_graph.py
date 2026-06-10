@@ -116,10 +116,19 @@ def print_heterodata_summary(data: HeteroData) -> None:
 
     print("\n  Edge Types:")
     total_edges = 0
+    relation_counts = defaultdict(int)
     for (src, rel, dst) in data.edge_types:
         e = data[src, rel, dst].edge_index.shape[1]
         total_edges += e
+        relation_counts[rel] += e
         print(f"    {src}-[{rel}]->{dst:<14} : {e:>5} edges")
+
+    print("\n  Degree Statistics:")
+    avg_degree = total_edges / max(1, total_nodes)
+    print(f"    Overall Avg Degree : {avg_degree:.2f}")
+    for rel, count in relation_counts.items():
+        avg_rel_degree = count / max(1, total_nodes)
+        print(f"    Avg Degree ({rel:<12}) : {avg_rel_degree:.2f}")
 
     print("\n" + "-" * 60)
     print(f"  Total nodes : {total_nodes}")
