@@ -7,7 +7,8 @@ Edge types constructed here:
   contains       — page → every element on that page
   reading_order  — sequential (y,x)-sorted chain per page
   spatial        — k-NN on centroids (same page), k configurable
-  reference      — figure/table → caption (text role='caption') via positional heuristics
+  reference      — (a) figure/table → caption via positional heuristics
+                   (b) text/section → figure/table via in-text mentions ("Figure 3")
   parent_child   — section → following content nodes until next section
   continuation   — table spanning consecutive pages (x-overlap heuristic)
 
@@ -25,8 +26,9 @@ Design choices:
 from __future__ import annotations
 
 import logging
+import re
 from collections import defaultdict
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
@@ -35,6 +37,15 @@ from hdgt.graph.schema import DocumentEdge, DocumentNode
 from hdgt.graph.node_builder import NodeBuilder
 
 logger = logging.getLogger(__name__)
+
+# ── Regex patterns for in-text figure/table mentions ─────────────────────────
+# Matches: "Figure 3", "Fig. 3", "fig 3", "FIG. 3"
+INTEXT_FIG_RE = re.compile(r'\b(?:Figure|Fig\.?)\s*(\d+)', re.IGNORECASE)
+# Matches: "Table 3", "TABLE 3"
+INTEXT_TBL_RE = re.compile(r'\bTable\s*(\d+)', re.IGNORECASE)
+# Matches caption starts: "Figure 3.", "Fig. 3:", "Table 2."
+CAPTION_FIG_RE = re.compile(r'^(?:Figure|Fig\.?)\s*(\d+)', re.IGNORECASE)
+CAPTION_TBL_RE = re.compile(r'^(?:Table)\s*(\d+)', re.IGNORECASE)
 
 
 class EdgeBuilder:
@@ -83,6 +94,7 @@ class EdgeBuilder:
         edges.extend(self._build_reading_order_edges(nodes))
         edges.extend(self._build_spatial_edges(nodes))
         edges.extend(self._build_caption_edges(nodes))
+        edges.extend(self._build_intext_reference_edges(nodes))
         edges.extend(self._build_parent_child_edges(nodes))
         edges.extend(self._build_continuation_edges(nodes))
 
@@ -383,6 +395,114 @@ class EdgeBuilder:
         logger.debug(f"  continuation: {len(edges)}")
         return edges
 
+    def _build_intext_reference_edges(self, nodes: List[DocumentNode]) -> List[DocumentEdge]:
+        """
+        Build reference edges from in-text figure/table citations.
+
+        Algorithm:
+          1. Scan captions to extract figure/table numbers:
+               "Figure 3: Architecture overview" → fig_num=3
+               "Table 2. Results" → tbl_num=2
+          2. Build lookup maps: fig_num→node, tbl_num→node (scoped per document_id).
+          3. Scan all text/section nodes for mentions like "Figure 3" or "Table 2".
+          4. Create a 'reference' edge: text_node → figure/table_node.
+
+        This is particularly powerful for scientific papers where authors write:
+          "As shown in Figure 3, our model..."  →  connects that paragraph to Figure 3.
+          "Table 2 summarises results..."        →  connects that section to Table 2.
+
+        Limitations (Phase 1):
+          - Figure numbers extracted from captions only; not from Docling metadata.
+          - If multiple figures share the same number (different doc sections), the
+            first one found wins. This is almost never an issue in scientific papers.
+          - Numbered references across documents in a batch are scoped by document_id.
+        """
+        edges: List[DocumentEdge] = []
+
+        # ── Step 1: Build figure/table number → node maps ──────────────
+        # Scoped per document_id to avoid cross-document collisions in batches.
+        fig_maps: Dict[str, Dict[int, DocumentNode]] = defaultdict(dict)  # doc_id → {num → node}
+        tbl_maps: Dict[str, Dict[int, DocumentNode]] = defaultdict(dict)
+
+        captions = [n for n in nodes if n.role == "caption"]
+        for cap in captions:
+            text = cap.content.strip()
+
+            fig_match = CAPTION_FIG_RE.match(text)
+            if fig_match:
+                num = int(fig_match.group(1))
+                # Find the nearest figure node to this caption (already linked by _build_caption_edges)
+                # As a proxy: pick the figure node on the same page with smallest distance
+                same_page_figs = [n for n in nodes if n.type == "figure" and n.page == cap.page]
+                if same_page_figs:
+                    nearest_fig = min(same_page_figs, key=lambda n: cap.centroid_distance(n))
+                    fig_maps[cap.document_id][num] = nearest_fig
+                continue
+
+            tbl_match = CAPTION_TBL_RE.match(text)
+            if tbl_match:
+                num = int(tbl_match.group(1))
+                same_page_tbls = [n for n in nodes if n.type == "table" and n.page == cap.page]
+                if same_page_tbls:
+                    nearest_tbl = min(same_page_tbls, key=lambda n: cap.centroid_distance(n))
+                    tbl_maps[cap.document_id][num] = nearest_tbl
+
+        # ── Step 2: Scan text/section nodes for in-text mentions ────────
+        mention_nodes = [n for n in nodes if n.type in ("text", "section") and n.content]
+        for node in mention_nodes:
+            text = node.content
+            doc_id = node.document_id
+
+            # Figure mentions
+            for match in INTEXT_FIG_RE.finditer(text):
+                num = int(match.group(1))
+                target = fig_maps[doc_id].get(num)
+                if target is None:
+                    continue
+                # Avoid self-reference (caption shouldn't reference its own figure)
+                if target.node_id == node.node_id:
+                    continue
+                edges.append(DocumentEdge(
+                    src_id=node.node_id,
+                    dst_id=target.node_id,
+                    src_type=node.type,
+                    dst_type="figure",
+                    relation="reference",
+                    weight=0.95,
+                    metadata={
+                        "confidence": 0.95,
+                        "source": "intext_regex",
+                        "mention": match.group(0),
+                        "figure_num": num,
+                    },
+                ))
+
+            # Table mentions
+            for match in INTEXT_TBL_RE.finditer(text):
+                num = int(match.group(1))
+                target = tbl_maps[doc_id].get(num)
+                if target is None:
+                    continue
+                if target.node_id == node.node_id:
+                    continue
+                edges.append(DocumentEdge(
+                    src_id=node.node_id,
+                    dst_id=target.node_id,
+                    src_type=node.type,
+                    dst_type="table",
+                    relation="reference",
+                    weight=0.95,
+                    metadata={
+                        "confidence": 0.95,
+                        "source": "intext_regex",
+                        "mention": match.group(0),
+                        "table_num": num,
+                    },
+                ))
+
+        logger.debug(f"  reference (intext): {len(edges)}")
+        return edges
+
     # ------------------------------------------------------------------
     # Utilities
     # ------------------------------------------------------------------
@@ -398,11 +518,20 @@ class EdgeBuilder:
         counts: Dict[str, int] = defaultdict(int)
         for e in edges:
             counts[e.relation] += 1
+        # also sub-categorise reference edges by source
+        ref_sources: Dict[str, int] = defaultdict(int)
+        for e in edges:
+            if e.relation == "reference":
+                src = e.metadata.get("source", "unknown")
+                ref_sources[src] += 1
         print("\n" + "=" * 54)
         print("  EDGE SUMMARY")
         print("=" * 54)
         for relation, count in sorted(counts.items()):
             print(f"  {relation:<18} : {count:>6} edges")
+            if relation == "reference" and ref_sources:
+                for src, c in sorted(ref_sources.items()):
+                    print(f"    ↳ {src:<20} : {c:>5}")
         print("-" * 54)
         print(f"  {'TOTAL':<18} : {sum(counts.values()):>6} edges")
         print("=" * 54 + "\n")
