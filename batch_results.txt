@@ -1,0 +1,360 @@
+--- Bahri_WACV ---
+
++======================================================+
+|       HDGT -- Phase 1: Document Graph Builder        |
++======================================================+
+  Document : Bahri_Test-Time_Adaptation_in_Point_Clouds_Leveraging_Sampling_Variation_with_Weight_WACV_2025_paper.pdf
+  Doc ID   : Bahri_WACV
+
+  [1/5] Parsing PDF with Docling...
+        → 134 elements extracted from 10 page(s)
+  [2/5] Building node feature tensors...
+
+======================================================
+  NODE SUMMARY
+======================================================
+  text         :    101 nodes  [caption:8, paragraph:93]
+  table        :      3 nodes
+  figure       :      6 nodes
+  section      :     14 nodes
+  page         :     10 nodes
+------------------------------------------------------
+  TOTAL        :    134 nodes
+======================================================
+
+  [3/5] Building graph edges...
+
+======================================================
+  EDGE SUMMARY
+======================================================
+  contains           :    124 edges
+  continuation       :      2 edges
+  parent_child       :     58 edges
+  reading_order      :    114 edges
+  reference          :     25 edges
+    ↳ heuristic_above      :     1
+    ↳ heuristic_below      :     5
+    ↳ intext_regex         :    17
+    ↳ nearest_fallback     :     2
+  spatial            :    448 edges
+------------------------------------------------------
+  TOTAL              :    771 edges
+======================================================
+
+  [4/5] Assembling HeteroData...
+
+============================================================
+  HETERODATA SUMMARY
+============================================================
+
+  Node Types:
+    page           :    10 nodes  (feat dim: 9)
+    figure         :     6 nodes  (feat dim: 9)
+    text           :   101 nodes  (feat dim: 9)
+    section        :    14 nodes  (feat dim: 9)
+    table          :     3 nodes  (feat dim: 9)
+
+  Edge Types:
+    page-[contains]->figure         :     6 edges
+    page-[contains]->text           :   101 edges
+    page-[contains]->section        :    14 edges
+    page-[contains]->table          :     3 edges
+    text-[reading_order]->figure         :     2 edges
+    figure-[reading_order]->section        :     1 edges
+    section-[reading_order]->text           :    14 edges
+    text-[reading_order]->text           :    76 edges
+    text-[reading_order]->section        :    12 edges
+    figure-[reading_order]->text           :     3 edges
+    table-[reading_order]->text           :     3 edges
+    text-[reading_order]->table          :     1 edges
+    figure-[reading_order]->figure         :     2 edges
+    figure-[spatial]->text           :    14 edges
+    text-[spatial]->figure         :    14 edges
+    figure-[spatial]->section        :     3 edges
+    section-[spatial]->figure         :     3 edges
+    text-[spatial]->section        :    43 edges
+    section-[spatial]->text           :    43 edges
+    text-[spatial]->text           :   302 edges
+    section-[spatial]->section        :     6 edges
+    table-[spatial]->text           :     7 edges
+    text-[spatial]->table          :     7 edges
+    table-[spatial]->table          :     2 edges
+    figure-[spatial]->figure         :     4 edges
+    figure-[reference]->text           :     5 edges
+    table-[reference]->text           :     3 edges
+    text-[reference]->figure         :    11 edges
+    text-[reference]->table          :     6 edges
+    section-[parent_child]->text           :    58 edges
+    table-[continuation]->table          :     2 edges
+
+  Degree Statistics:
+    Overall Avg Degree : 5.75
+    Avg Degree (contains    ) : 0.93
+    Avg Degree (reading_order) : 0.85
+    Avg Degree (spatial     ) : 3.34
+    Avg Degree (reference   ) : 0.19
+    Avg Degree (parent_child) : 0.43
+    Avg Degree (continuation) : 0.01
+
+------------------------------------------------------------
+  Total nodes : 134
+  Total edges : 771
+============================================================
+
+  ✓  data.validate() passed
+
+  [5/5] Saving outputs...
+  ✓  Graph saved  : experiments\Bahri_WACV_graph.pt
+  ✓  Reload check : OK (5 node types)
+
++======================================================+
+|  Done in 88.1s                                       |
++======================================================+
+
+
+
+--- Open_YOLO_3D ---
+
++======================================================+
+|       HDGT -- Phase 1: Document Graph Builder        |
++======================================================+
+  Document : Open-YOLO 3D Towards Fast and Accurate.pdf
+  Doc ID   : Open_YOLO_3D
+
+  [1/5] Parsing PDF with Docling...
+        → 191 elements extracted from 20 page(s)
+  [2/5] Building node feature tensors...
+
+======================================================
+  NODE SUMMARY
+======================================================
+  text         :    133 nodes  [caption:20, paragraph:113]
+  table        :      5 nodes
+  figure       :     15 nodes
+  section      :     18 nodes
+  page         :     20 nodes
+------------------------------------------------------
+  TOTAL        :    191 nodes
+======================================================
+
+  [3/5] Building graph edges...
+
+======================================================
+  EDGE SUMMARY
+======================================================
+  contains           :    171 edges
+  continuation       :     20 edges
+  parent_child       :     46 edges
+  reading_order      :    151 edges
+  reference          :     53 edges
+    ↳ heuristic_above      :     5
+    ↳ heuristic_below      :    11
+    ↳ intext_regex         :    33
+    ↳ nearest_fallback     :     4
+  spatial            :    596 edges
+------------------------------------------------------
+  TOTAL              :   1037 edges
+======================================================
+
+  [4/5] Assembling HeteroData...
+
+============================================================
+  HETERODATA SUMMARY
+============================================================
+
+  Node Types:
+    page           :    20 nodes  (feat dim: 9)
+    section        :    18 nodes  (feat dim: 9)
+    text           :   133 nodes  (feat dim: 9)
+    figure         :    15 nodes  (feat dim: 9)
+    table          :     5 nodes  (feat dim: 9)
+
+  Edge Types:
+    page-[contains]->section        :    18 edges
+    page-[contains]->text           :   133 edges
+    page-[contains]->figure         :    15 edges
+    page-[contains]->table          :     5 edges
+    section-[reading_order]->text           :    17 edges
+    text-[reading_order]->text           :    91 edges
+    text-[reading_order]->section        :    13 edges
+    figure-[reading_order]->text           :    15 edges
+    text-[reading_order]->table          :     5 edges
+    table-[reading_order]->text           :     4 edges
+    table-[reading_order]->figure         :     1 edges
+    section-[reading_order]->figure         :     1 edges
+    text-[reading_order]->figure         :     4 edges
+    section-[spatial]->text           :    45 edges
+    text-[spatial]->section        :    45 edges
+    text-[spatial]->text           :   386 edges
+    section-[spatial]->section        :    14 edges
+    figure-[spatial]->text           :    30 edges
+    text-[spatial]->figure         :    30 edges
+    figure-[spatial]->section        :     3 edges
+    section-[spatial]->figure         :     3 edges
+    table-[spatial]->text           :    13 edges
+    text-[spatial]->table          :    13 edges
+    table-[spatial]->section        :     1 edges
+    section-[spatial]->table          :     1 edges
+    table-[spatial]->figure         :     1 edges
+    figure-[spatial]->table          :     1 edges
+    table-[spatial]->table          :     2 edges
+    figure-[spatial]->figure         :     8 edges
+    figure-[reference]->text           :    15 edges
+    table-[reference]->text           :     5 edges
+    text-[reference]->figure         :    21 edges
+    text-[reference]->table          :    12 edges
+    section-[parent_child]->text           :    44 edges
+    section-[parent_child]->figure         :     2 edges
+    table-[continuation]->table          :     6 edges
+    figure-[continuation]->figure         :    14 edges
+
+  Degree Statistics:
+    Overall Avg Degree : 5.43
+    Avg Degree (contains    ) : 0.90
+    Avg Degree (reading_order) : 0.79
+    Avg Degree (spatial     ) : 3.12
+    Avg Degree (reference   ) : 0.28
+    Avg Degree (parent_child) : 0.24
+    Avg Degree (continuation) : 0.10
+
+------------------------------------------------------------
+  Total nodes : 191
+  Total edges : 1037
+============================================================
+
+  ✓  data.validate() passed
+
+  [5/5] Saving outputs...
+  ✓  Graph saved  : experiments\Open_YOLO_3D_graph.pt
+  ✓  Reload check : OK (5 node types)
+
++======================================================+
+|  Done in 64.6s                                       |
++======================================================+
+
+
+
+--- Rajic_Segment ---
+
++======================================================+
+|       HDGT -- Phase 1: Document Graph Builder        |
++======================================================+
+  Document : Rajic_Segment_Anything_Meets_Point_Tracking_WACV_2025_paper.pdf
+  Doc ID   : Rajic_Segment
+
+  [1/5] Parsing PDF with Docling...
+        → 165 elements extracted from 10 page(s)
+  [2/5] Building node feature tensors...
+
+======================================================
+  NODE SUMMARY
+======================================================
+  text         :    123 nodes  [caption:15, paragraph:108]
+  table        :      7 nodes
+  figure       :      8 nodes
+  section      :     17 nodes
+  page         :     10 nodes
+------------------------------------------------------
+  TOTAL        :    165 nodes
+======================================================
+
+  [3/5] Building graph edges...
+
+======================================================
+  EDGE SUMMARY
+======================================================
+  contains           :    155 edges
+  continuation       :      6 edges
+  parent_child       :     78 edges
+  reading_order      :    145 edges
+  reference          :     37 edges
+    ↳ heuristic_above      :     7
+    ↳ heuristic_below      :     8
+    ↳ intext_regex         :    22
+  spatial            :    566 edges
+------------------------------------------------------
+  TOTAL              :    987 edges
+======================================================
+
+  [4/5] Assembling HeteroData...
+
+============================================================
+  HETERODATA SUMMARY
+============================================================
+
+  Node Types:
+    page           :    10 nodes  (feat dim: 9)
+    figure         :     8 nodes  (feat dim: 9)
+    text           :   123 nodes  (feat dim: 9)
+    section        :    17 nodes  (feat dim: 9)
+    table          :     7 nodes  (feat dim: 9)
+
+  Edge Types:
+    page-[contains]->figure         :     8 edges
+    page-[contains]->text           :   123 edges
+    page-[contains]->section        :    17 edges
+    page-[contains]->table          :     7 edges
+    text-[reading_order]->figure         :     5 edges
+    figure-[reading_order]->section        :     1 edges
+    section-[reading_order]->text           :    16 edges
+    figure-[reading_order]->text           :     6 edges
+    text-[reading_order]->text           :    91 edges
+    text-[reading_order]->section        :    12 edges
+    text-[reading_order]->table          :     5 edges
+    table-[reading_order]->section        :     2 edges
+    section-[reading_order]->section        :     1 edges
+    table-[reading_order]->text           :     4 edges
+    table-[reading_order]->table          :     1 edges
+    figure-[reading_order]->table          :     1 edges
+    figure-[spatial]->section        :     4 edges
+    section-[spatial]->figure         :     4 edges
+    figure-[spatial]->text           :    19 edges
+    text-[spatial]->figure         :    19 edges
+    text-[spatial]->section        :    54 edges
+    section-[spatial]->text           :    54 edges
+    text-[spatial]->text           :   352 edges
+    section-[spatial]->section        :    10 edges
+    figure-[spatial]->figure         :     4 edges
+    table-[spatial]->text           :    17 edges
+    text-[spatial]->table          :    17 edges
+    table-[spatial]->section        :     2 edges
+    section-[spatial]->table          :     2 edges
+    table-[spatial]->table          :     6 edges
+    table-[spatial]->figure         :     1 edges
+    figure-[spatial]->table          :     1 edges
+    figure-[reference]->text           :     8 edges
+    table-[reference]->text           :     7 edges
+    text-[reference]->figure         :    15 edges
+    text-[reference]->table          :     7 edges
+    section-[parent_child]->text           :    75 edges
+    section-[parent_child]->figure         :     1 edges
+    section-[parent_child]->table          :     2 edges
+    table-[continuation]->table          :     4 edges
+    figure-[continuation]->figure         :     2 edges
+
+  Degree Statistics:
+    Overall Avg Degree : 5.98
+    Avg Degree (contains    ) : 0.94
+    Avg Degree (reading_order) : 0.88
+    Avg Degree (spatial     ) : 3.43
+    Avg Degree (reference   ) : 0.22
+    Avg Degree (parent_child) : 0.47
+    Avg Degree (continuation) : 0.04
+
+------------------------------------------------------------
+  Total nodes : 165
+  Total edges : 987
+============================================================
+
+  ✓  data.validate() passed
+
+  [5/5] Saving outputs...
+  ✓  Graph saved  : experiments\Rajic_Segment_graph.pt
+  ✓  Reload check : OK (5 node types)
+
++======================================================+
+|  Done in 64.3s                                       |
++======================================================+
+
+
+
