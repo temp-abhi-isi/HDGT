@@ -31,10 +31,14 @@ def check(label: str, ok: bool, detail: str = "") -> None:
 
 
 def main() -> None:
+    # Force UTF-8 output on Windows consoles
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+
     print()
-    print("═" * 52)
-    print("   HDGT — Environment Check")
-    print("═" * 52)
+    print("=" * 52)
+    print("   HDGT -- Environment Check")
+    print("=" * 52)
     print()
 
     all_ok = True
@@ -117,19 +121,19 @@ def main() -> None:
 
     # ── Summary ────────────────────────────────────────────────────────
     print()
-    print("═" * 52)
+    print("=" * 52)
     if all_ok:
-        print("  \033[92m✓ All checks passed — safe to install PyG and docling.\033[0m")
+        print("  [OK] All checks passed -- safe to install PyG and docling.")
         print()
         print("  Next steps:")
         print("    pip install -r requirements.txt")
     else:
-        print("  \033[91m✗ Some checks failed — fix PyTorch/CUDA first.\033[0m")
+        print("  [FAIL] Some checks failed -- fix PyTorch/CUDA first.")
         print()
         print("  Fix with:")
         print("    pip install torch torchvision torchaudio \\")
         print("        --index-url https://download.pytorch.org/whl/cu124")
-    print("═" * 52)
+    print("=" * 52)
     print()
 
 
