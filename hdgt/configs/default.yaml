@@ -1,0 +1,36 @@
+# hdgt/configs/default.yaml
+#
+# Tunable parameters for the Phase 1 graph extraction pipeline.
+# All values here can be overridden from the command line via --config.
+
+parser:
+  # Maximum text content length stored per node (characters)
+  max_content_length: 2000
+
+edges:
+  # k-NN spatial edges: number of nearest neighbours per node (same page)
+  # Different layouts:
+  #   2-column academic  → k=5 works well
+  #   dense legal doc    → try k=3
+  #   slide decks        → try k=4
+  k_spatial: 5
+
+  # Caption association: max centroid distance (normalised) for heuristic matching.
+  # Larger values = more permissive matching.
+  caption_y_threshold: 0.20
+
+  # Continuation edges: minimum horizontal overlap (normalised) between
+  # tables/figures on consecutive pages to be considered a continuation.
+  continuation_x_overlap: 0.30
+
+visualization:
+  # Figure size in inches
+  figsize: [20, 14]
+  # Node size in networkx draw
+  node_size: 800
+  # Font size for node labels
+  font_size: 7
+  # Show edge labels (relation names)
+  show_edge_labels: false
+  # DPI for saved PNG
+  dpi: 150
