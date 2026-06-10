@@ -1,0 +1,193 @@
+C:\Users\abhin\anaconda3\envs\hdgt\python.exe : [32m[INFO] 2026-06-10 13:14:26,940 [RapidOCR] base.py:22: Using 
+engine_name: torch[0m
+At line:1 char:53
++ ... ONUTF8="1"; C:\Users\abhin\anaconda3\envs\hdgt\python.exe test_parser ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([32m[INFO] 202...name: torch[0m:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[32m[INFO] 2026-06-10 13:14:26,957 [RapidOCR] device_config.py:64: Using GPU device with ID: 0[0m
+[32m[INFO] 2026-06-10 13:14:26,978 [RapidOCR] download_file.py:60: File exists and is valid: 
+C:\Users\abhin\anaconda3\envs\hdgt\Lib\site-packages\rapidocr\models\ch_PP-OCRv4_det_mobile.pth[0m
+[32m[INFO] 2026-06-10 13:14:26,978 [RapidOCR] main.py:50: Using 
+C:\Users\abhin\anaconda3\envs\hdgt\Lib\site-packages\rapidocr\models\ch_PP-OCRv4_det_mobile.pth[0m
+[32m[INFO] 2026-06-10 13:14:27,529 [RapidOCR] base.py:22: Using engine_name: torch[0m
+[32m[INFO] 2026-06-10 13:14:27,530 [RapidOCR] device_config.py:64: Using GPU device with ID: 0[0m
+[32m[INFO] 2026-06-10 13:14:27,533 [RapidOCR] download_file.py:60: File exists and is valid: 
+C:\Users\abhin\anaconda3\envs\hdgt\Lib\site-packages\rapidocr\models\ch_ptocr_mobile_v2.0_cls_mobile.pth[0m
+[32m[INFO] 2026-06-10 13:14:27,534 [RapidOCR] main.py:50: Using 
+C:\Users\abhin\anaconda3\envs\hdgt\Lib\site-packages\rapidocr\models\ch_ptocr_mobile_v2.0_cls_mobile.pth[0m
+[32m[INFO] 2026-06-10 13:14:27,717 [RapidOCR] base.py:22: Using engine_name: torch[0m
+[32m[INFO] 2026-06-10 13:14:27,717 [RapidOCR] device_config.py:64: Using GPU device with ID: 0[0m
+[32m[INFO] 2026-06-10 13:14:27,751 [RapidOCR] download_file.py:60: File exists and is valid: 
+C:\Users\abhin\anaconda3\envs\hdgt\Lib\site-packages\rapidocr\models\ch_PP-OCRv4_rec_mobile.pth[0m
+[32m[INFO] 2026-06-10 13:14:27,752 [RapidOCR] main.py:50: Using 
+C:\Users\abhin\anaconda3\envs\hdgt\Lib\site-packages\rapidocr\models\ch_PP-OCRv4_rec_mobile.pth[0m
+
+  Loading Docling...
+  Parsing: TFMAdapter.pdf  (this may take 30120s on first run)
+
+
+Loading weights:   0%|          | 0/770 [00:00<?, ?it/s]
+Loading weights:  30%|       | 231/770 [00:00<00:00, 2201.03it/s]
+Loading weights:  59%|    | 452/770 [00:00<00:00, 2020.29it/s]
+Loading weights:  89%| | 682/770 [00:00<00:00, 2131.11it/s]
+Loading weights: 100%|| 770/770 [00:00<00:00, 2109.49it/s]
+Usage of TableItem.export_to_markdown() without `doc` argument is deprecated.
+Usage of TableItem.export_to_markdown() without `doc` argument is deprecated.
+Usage of TableItem.export_to_markdown() without `doc` argument is deprecated.
+Usage of TableItem.export_to_markdown() without `doc` argument is deprecated.
+
+  TFMAdapter.pdf                                  
+
+
+  Total pages : 10
+  Total items : 221
+  Items shown : 80
+
+   Raw label distribution (Docling) 
+    text                   103   text+paragraph  
+    list_item               44   text+paragraph  
+    section_header          35   section+section_header  
+    formula                 15   text+paragraph  
+    caption                  9   text+caption  
+    picture                  6   figure+figure  
+    footnote                 5   text+paragraph  
+    table                    4   table+table  
+
+   Mapped type distribution (HDGT) 
+    text             176  
+    section           35  
+    figure             6  
+    table              4  
+
+   Bounding box validity 
+    Valid   : 221/221 (100.0%)
+
+   Section nodes (35 found) 
+    p  1  [section_header ]  'TFMAdapter: Lightweight Instance-Level Adaptation of Foundat'
+    p  1  [section_header ]  'Abstract'
+    p  1  [section_header ]  'CCS Concepts'
+    p  1  [section_header ]  'Keywords'
+    p  1  [section_header ]  'ACMReference Format:'
+    p  1  [section_header ]  '1 Introduction'
+    p  2  [section_header ]  '2 Related Work'
+    p  2  [section_header ]  '2.1 Emergence of Time Series Foundation Models'
+    p  3  [section_header ]  '2.2 Transformer-based Foundation Models'
+    p  3  [section_header ]  '2.3 Foundation Models Harnessing Covariates'
+    p  3  [section_header ]  '3 Problem Definition'
+    p  3  [section_header ]  '3.1 Forecasting Settings'
+    p  4  [section_header ]  '3.2 Instance-level Adapters for Forecasting with Covariates'
+    p  4  [section_header ]  '4 Our Approach: TFMAdapter'
+    p  4  [section_header ]  '4.1 Stage I: Acquiring Labeled Data'
+    p  4  [section_header ]  'Stage-I'
+    p  4  [section_header ]  'Acquire Labeled Data from the Foundation Model'
+    p  4  [section_header ]  'end for'
+    p  4  [section_header ]  'Generate Pseudo-forecasts'
+    p  4  [section_header ]  'end for'
+    ... and 15 more
+
+   Figure nodes (6 found) 
+    p  1  bbox=[0.086, 0.821, 0.159, 0.841]  ''
+    p  2  bbox=[0.105, 0.104, 0.891, 0.399]  ''
+    p  3  bbox=[0.521, 0.269, 0.913, 0.424]  ''
+    p  5  bbox=[0.521, 0.425, 0.909, 0.598]  ''
+    p  8  bbox=[0.52, 0.382, 0.911, 0.554]  ''
+    p  9  bbox=[0.088, 0.295, 0.479, 0.485]  ''
+
+   Caption nodes (type=text, role=caption)  9 found 
+    p  2  'Figure 1: Overall TFMAdapter Approach. ( 1 ) Windows are selected base'
+    p  3  'Figure 2: Input and output representation of Moirai for forecasting wi'
+    p  5  'Figure 3: Average accuracy of Moirai foundation models on ETT datasets'
+    p  6  'Table 1: Description of Datasets Used for Evaluation.'
+    p  7  'Table 2: Performance comparison of TFMAdapter , foundation models, and'
+    p  8  'Table 3: Comparison of MASE for TFMAdapter , ChronosX and NBEATSx-G. D'
+    p  8  'Figure 4: Impact of the Pseudo-Forecast Generator. Training with pseud'
+    p  9  'Figure 5: Comparison of Window Selection Strategies. The final forecas'
+    p  9  'Table 4: Comparison of TFMAdapter and Foundation Models for varying hi'
+
+   Item detail table (first 80 of 221) 
+
+ #       raw_label              type      role        content (preview)                       bbox? 
+            
+ 0       section_header        section     section_he  TFMAdapter: Lightweight Instance-Level       
+ 1       text                  text        paragraph   Afrin Dange                                  
+ 2       text                  text        paragraph   Indian Institute of Technology Bombay        
+ 3       section_header        section     section_he  Abstract                                     
+ 4       text                  text        paragraph   Time Series Foundation Models (TSFMs)        
+ 5       text                  text        paragraph   We propose TFMAdapter , a lightweight,       
+ 6       text                  text        paragraph   Extensive experiments on real-world da       
+ 7       section_header        section     section_he  CCS Concepts                                 
+ 8       text                  text        paragraph    Computing methodologies  Machine le       
+ 9       section_header        section     section_he  Keywords                                     
+ 10      text                  text        paragraph   Time Series Forecasting, Covariates, F       
+ 11      section_header        section     section_he  ACMReference Format:                         
+ 12      text                  text        paragraph   Afrin Dange and Sunita Sarawagi. 2025.       
+ 13      picture               figure      figure                                                   
+ 14      text                  text        paragraph   This work is licensed under a Creative       
+ 15      footnote              text        paragraph    2025 Copyright held by the owner/aut       
+ 16      text                  text        paragraph   ACM ISBN 979-8-4007-2040-6/2025/11           
+ 17      text                  text        paragraph   https://doi.org/10.1145/3746252.376127       
+ 18      text                  text        paragraph   Sunita Sarawagi                              
+ 19      text                  text        paragraph   Indian Institute of Technology Bombay        
+ 20      text                  text        paragraph   Knowledge Management (CIKM '25), Novem       
+ 21      section_header        section     section_he  1 Introduction                               
+ 22      text                  text        paragraph   Time Series Foundation Models (TSFMs)        
+ 23      text                  text        paragraph   Time series forecasting can be categor       
+ 24      text                  text        paragraph   Moirai [28] is one of the few foundati       
+ 25      text                  text        paragraph   Our goal is to design an adapter that        
+ 26      footnote              text        paragraph   0 Code is available at https://github.       
+ 27      picture               figure      figure                                                   
+ 28      caption               text        caption     Figure 1: Overall TFMAdapter Approach.       
+ 29      text                  text        paragraph   Wepresent TFMAdapter , a method of tra       
+ 30      text                  text        paragraph   Contributions. Our contributions are a       
+ 31      list_item             text        paragraph   We identify and analyze the limitation       
+ 32      list_item             text        paragraph   Wepropose an instance-level lightweigh       
+ 33      list_item             text        paragraph   We present a novel two-stage method of       
+ 34      list_item             text        paragraph   We demonstrate the efficacy of our app       
+ 35      section_header        section     section_he  2 Related Work                               
+ 36      section_header        section     section_he  2.1 Emergence of Time Series Foundatio       
+ 37      text                  text        paragraph   Time series forecasting has traditiona       
+ 38      text                  text        paragraph   Deep learning introduced more expressi       
+ 39      text                  text        paragraph   Following the emergence of Transformer       
+ 40      section_header        section     section_he  2.2 Transformer-based Foundation Model       
+ 41      text                  text        paragraph   Foundation models based on transformer       
+ 42      text                  text        paragraph   Encoder-only: Encoder-only foundation        
+ 43      text                  text        paragraph   Decoder-only: Decoder-only foundation        
+ 44      text                  text        paragraph   Encoder-Decoder: TimeGPT [11] is a pro       
+ 45      footnote              text        paragraph   1 https://aws.amazon.com/blogs/machine       
+ 46      section_header        section     section_he  2.3 Foundation Models Harnessing Covar       
+ 47      text                  text        paragraph   Tiny Time Mixers (TTM) [10] are founda       
+ 48      picture               figure      figure                                                   
+ 49      caption               text        caption     Figure 2: Input and output representat       
+ 50      section_header        section     section_he  3 Problem Definition                         
+ 51      text                  text        paragraph   We first define the time series foreca       
+ 52      section_header        section     section_he  3.1 Forecasting Settings                     
+ 53      text                  text        paragraph   Consider a set of  time series, where       
+ 54      text                  text        paragraph   Univariate Forecasting: This involves        
+ 55      formula               text        paragraph                                                
+ 56      text                  text        paragraph   Multivariate Forecasting: When multipl       
+ 57      formula               text        paragraph                                                
+ 58      text                  text        paragraph   Forecasting with Covariates: This sett       
+ 59      footnote              text        paragraph   2 We have not included ChronosX in eva       
+ 60      formula               text        paragraph                                                
+ 61      section_header        section     section_he  3.2 Instance-level Adapters for Foreca       
+ 62      text                  text        paragraph   Weassumethe availability of a time ser       
+ 63      text                  text        paragraph   The core challenge here is that genera       
+ 64      section_header        section     section_he  4 Our Approach: TFMAdapter                   
+ 65      text                  text        paragraph   We now present TFMAdapter , a lightwei       
+ 66      section_header        section     section_he  4.1 Stage I: Acquiring Labeled Data          
+ 67      text                  text        paragraph   The first stage addresses the challeng       
+ 68      text                  text        paragraph   Algorithm 1 Lightweight Adapter for Fo       
+ 69      formula               text        paragraph                                                
+ 70      section_header        section     section_he  Stage-I                                      
+ 71      section_header        section     section_he  Acquire Labeled Data from the Foundati       
+ 72      text                  text        paragraph   Partition  :  into  = (  - )/  n       
+ 73      text                  text        paragraph    h is the minimum history to predict        
+ 74      formula               text        paragraph                                                
+ 75      formula               text        paragraph                                                
+ 76      section_header        section     section_he  end for                                      
+ 77      text                  text        paragraph   Retain  = 3 windows with the lowest,        
+ 78      section_header        section     section_he  Generate Pseudo-forecasts                    
+ 79      formula               text        paragraph                                                
+

@@ -1,0 +1,3 @@
+Relation,Paper,Total_Extracted,Sample_Size,Correct_Matches,Precision_Percent
+Figure-Caption,Open-YOLO3D,16,10,10,100
+In-Text Reference,Open-YOLO3D,33,20,18,90
