@@ -13,7 +13,7 @@ edges:
   #   2-column academic  → k=5 works well
   #   dense legal doc    → try k=3
   #   slide decks        → try k=4
-  k_spatial: 5
+  k_spatial: 3
 
   # Caption association: max centroid distance (normalised) for heuristic matching.
   # Larger values = more permissive matching.
