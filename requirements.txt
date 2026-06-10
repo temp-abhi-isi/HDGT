@@ -1,0 +1,32 @@
+# Core deep learning
+torch>=2.5.0
+torchvision>=0.20.0
+torchaudio>=2.5.0
+# Install PyTorch with CUDA 12.4 support (compatible with CUDA 12.9 driver):
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+
+# Graph learning
+torch-geometric>=2.6.0
+
+# Graph utilities
+networkx>=3.3
+
+# Visualization
+matplotlib>=3.9.0
+
+# Data processing
+pandas>=2.2.0
+numpy>=1.26.0
+tqdm>=4.66.0
+
+# Config
+pyyaml>=6.0.1
+
+# Geometry utilities (for future Shapely-based bbox ops)
+shapely>=2.0.0
+
+# Machine learning utilities
+scikit-learn>=1.5.0
+
+# Document parsing
+docling>=2.0.0
