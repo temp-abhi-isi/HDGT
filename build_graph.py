@@ -41,9 +41,9 @@ def load_config(config_path: str) -> dict:
 
 def print_header(doc_id: str, pdf_path: Path) -> None:
     print()
-    print("╔══════════════════════════════════════════════════════╗")
-    print("║        HDGT — Phase 1: Document Graph Builder        ║")
-    print("╚══════════════════════════════════════════════════════╝")
+    print("+" + "=" * 54 + "+")
+    print("|       HDGT -- Phase 1: Document Graph Builder        |")
+    print("+" + "=" * 54 + "+")
     print(f"  Document : {pdf_path.name}")
     print(f"  Doc ID   : {doc_id}")
     print()
@@ -65,6 +65,9 @@ def main() -> None:
                         help="Document identifier (default: PDF filename stem)")
     parser.add_argument("--visualize", "-v", action="store_true",
                         help="Render and save a graph visualization PNG.")
+    parser.add_argument("--save-figures", action="store_true",
+                        help="Extract and save figure images to <output>/<doc_id>_figures/. "
+                             "Populates node.image_path for Phase 2 Qwen encoding.")
     parser.add_argument("--no-save",       action="store_true",
                         help="Skip saving graph.pt (useful for quick testing).")
     parser.add_argument("--verbose",       action="store_true",
@@ -98,8 +101,12 @@ def main() -> None:
     # ── Step 1: Parse PDF ──────────────────────────────────────────────
     print("  [1/5] Parsing PDF with Docling...")
     from hdgt.parsers.docling_parser import DoclingParser
-    parser_obj = DoclingParser(verbose=args.verbose)
-    nodes = parser_obj.parse(pdf_path, document_id=doc_id)
+    parser_obj = DoclingParser(verbose=args.verbose, save_figures=args.save_figures)
+    figures_dir = None
+    if args.save_figures:
+        figures_dir = output_dir / f"{doc_id}_figures"
+        print(f"        → Figure images will be saved to: {figures_dir}")
+    nodes = parser_obj.parse(pdf_path, document_id=doc_id, figures_dir=figures_dir)
 
     num_pages = max((n.page for n in nodes), default=0) + 1
     print(f"        → {len(nodes)} elements extracted from {num_pages} page(s)")
@@ -157,9 +164,9 @@ def main() -> None:
 
     elapsed = time.perf_counter() - t0
     print()
-    print("╔══════════════════════════════════════════════════════╗")
-    print(f"║  Done in {elapsed:.1f}s".ljust(54) + "║")
-    print("╚══════════════════════════════════════════════════════╝")
+    print("+" + "=" * 54 + "+")
+    print(f"|  Done in {elapsed:.1f}s".ljust(55) + "|")
+    print("+" + "=" * 54 + "+")
     print()
 
 
