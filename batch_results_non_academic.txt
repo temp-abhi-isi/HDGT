@@ -1,0 +1,299 @@
+--- Form_Survey ---
+
++======================================================+
+|       HDGT -- Phase 1: Document Graph Builder        |
++======================================================+
+  Document : Green Gray Simple Survey Form A4 Document.pdf
+  Doc ID   : Form_Survey
+
+  [1/5] Parsing PDF with Docling...
+        → 23 elements extracted from 1 page(s)
+  [2/5] Building node feature tensors...
+
+======================================================
+  NODE SUMMARY
+======================================================
+  text         :     17 nodes  [paragraph:17]
+  table        :      1 nodes
+  figure       :      1 nodes
+  section      :      3 nodes
+  page         :      1 nodes
+------------------------------------------------------
+  TOTAL        :     23 nodes
+======================================================
+
+  [3/5] Building graph edges...
+
+======================================================
+  EDGE SUMMARY
+======================================================
+  contains           :     22 edges
+  parent_child       :     18 edges
+  reading_order      :     21 edges
+  spatial            :     86 edges
+------------------------------------------------------
+  TOTAL              :    147 edges
+======================================================
+
+  [4/5] Assembling HeteroData...
+
+============================================================
+  HETERODATA SUMMARY
+============================================================
+
+  Node Types:
+    page           :     1 nodes  (feat dim: 9)
+    text           :    17 nodes  (feat dim: 9)
+    figure         :     1 nodes  (feat dim: 9)
+    section        :     3 nodes  (feat dim: 9)
+    table          :     1 nodes  (feat dim: 9)
+
+  Edge Types:
+    page-[contains]->text           :    17 edges
+    page-[contains]->figure         :     1 edges
+    page-[contains]->section        :     3 edges
+    page-[contains]->table          :     1 edges
+    figure-[reading_order]->section        :     1 edges
+    section-[reading_order]->section        :     1 edges
+    section-[reading_order]->text           :     2 edges
+    text-[reading_order]->text           :    15 edges
+    text-[reading_order]->section        :     1 edges
+    text-[reading_order]->table          :     1 edges
+    text-[spatial]->text           :    62 edges
+    figure-[spatial]->section        :     2 edges
+    section-[spatial]->figure         :     2 edges
+    figure-[spatial]->text           :     1 edges
+    text-[spatial]->figure         :     1 edges
+    section-[spatial]->section        :     2 edges
+    section-[spatial]->text           :     5 edges
+    text-[spatial]->section        :     5 edges
+    table-[spatial]->text           :     2 edges
+    text-[spatial]->table          :     2 edges
+    table-[spatial]->section        :     1 edges
+    section-[spatial]->table          :     1 edges
+    section-[parent_child]->text           :    17 edges
+    section-[parent_child]->table          :     1 edges
+
+  Degree Statistics:
+    Overall Avg Degree : 6.39
+    Avg Degree (contains    ) : 0.96
+    Avg Degree (reading_order) : 0.91
+    Avg Degree (spatial     ) : 3.74
+    Avg Degree (parent_child) : 0.78
+
+------------------------------------------------------------
+  Total nodes : 23
+  Total edges : 147
+============================================================
+
+  ✓  data.validate() passed
+
+  [5/5] Saving outputs...
+  ✓  Graph saved  : experiments\Form_Survey_graph.pt
+  ✓  Reload check : OK (5 node types)
+
++======================================================+
+|  Done in 40.5s                                       |
++======================================================+
+
+
+
+--- Pitch_Deck ---
+
++======================================================+
+|       HDGT -- Phase 1: Document Graph Builder        |
++======================================================+
+  Document : NVCPitchDeckTemplate.pdf
+  Doc ID   : Pitch_Deck
+
+  [1/5] Parsing PDF with Docling...
+        → 112 elements extracted from 16 page(s)
+  [2/5] Building node feature tensors...
+
+======================================================
+  NODE SUMMARY
+======================================================
+  text         :     61 nodes  [paragraph:61]
+  table        :      0 nodes
+  figure       :     18 nodes
+  section      :     17 nodes
+  page         :     16 nodes
+------------------------------------------------------
+  TOTAL        :    112 nodes
+======================================================
+
+  [3/5] Building graph edges...
+
+======================================================
+  EDGE SUMMARY
+======================================================
+  contains           :     96 edges
+  parent_child       :     79 edges
+  reading_order      :     80 edges
+  spatial            :    354 edges
+------------------------------------------------------
+  TOTAL              :    609 edges
+======================================================
+
+  [4/5] Assembling HeteroData...
+
+============================================================
+  HETERODATA SUMMARY
+============================================================
+
+  Node Types:
+    page           :    16 nodes  (feat dim: 9)
+    figure         :    18 nodes  (feat dim: 9)
+    section        :    17 nodes  (feat dim: 9)
+    text           :    61 nodes  (feat dim: 9)
+
+  Edge Types:
+    page-[contains]->figure         :    18 edges
+    page-[contains]->section        :    17 edges
+    page-[contains]->text           :    61 edges
+    section-[reading_order]->figure         :     2 edges
+    figure-[reading_order]->text           :     2 edges
+    text-[reading_order]->figure         :    16 edges
+    section-[reading_order]->text           :    15 edges
+    text-[reading_order]->text           :    44 edges
+    text-[reading_order]->section        :     1 edges
+    figure-[spatial]->section        :     8 edges
+    section-[spatial]->figure         :     8 edges
+    figure-[spatial]->text           :    41 edges
+    text-[spatial]->figure         :    41 edges
+    figure-[spatial]->figure         :     4 edges
+    section-[spatial]->text           :    43 edges
+    text-[spatial]->section        :    43 edges
+    text-[spatial]->text           :   164 edges
+    section-[spatial]->section        :     2 edges
+    section-[parent_child]->figure         :    18 edges
+    section-[parent_child]->text           :    61 edges
+
+  Degree Statistics:
+    Overall Avg Degree : 5.44
+    Avg Degree (contains    ) : 0.86
+    Avg Degree (reading_order) : 0.71
+    Avg Degree (spatial     ) : 3.16
+    Avg Degree (parent_child) : 0.71
+
+------------------------------------------------------------
+  Total nodes : 112
+  Total edges : 609
+============================================================
+
+  ✓  data.validate() passed
+
+  [5/5] Saving outputs...
+  ✓  Graph saved  : experiments\Pitch_Deck_graph.pt
+  ✓  Reload check : OK (4 node types)
+
++======================================================+
+|  Done in 41.9s                                       |
++======================================================+
+
+
+
+--- Invoice_Sample ---
+
++======================================================+
+|       HDGT -- Phase 1: Document Graph Builder        |
++======================================================+
+  Document : wordpress-pdf-invoice-plugin-sample.pdf
+  Doc ID   : Invoice_Sample
+
+  [1/5] Parsing PDF with Docling...
+        → 14 elements extracted from 1 page(s)
+  [2/5] Building node feature tensors...
+
+======================================================
+  NODE SUMMARY
+======================================================
+  text         :      6 nodes  [paragraph:6]
+  table        :      3 nodes
+  figure       :      1 nodes
+  section      :      3 nodes
+  page         :      1 nodes
+------------------------------------------------------
+  TOTAL        :     14 nodes
+======================================================
+
+  [3/5] Building graph edges...
+
+======================================================
+  EDGE SUMMARY
+======================================================
+  contains           :     13 edges
+  parent_child       :      9 edges
+  reading_order      :     12 edges
+  spatial            :     50 edges
+------------------------------------------------------
+  TOTAL              :     84 edges
+======================================================
+
+  [4/5] Assembling HeteroData...
+
+============================================================
+  HETERODATA SUMMARY
+============================================================
+
+  Node Types:
+    page           :     1 nodes  (feat dim: 9)
+    figure         :     1 nodes  (feat dim: 9)
+    section        :     3 nodes  (feat dim: 9)
+    text           :     6 nodes  (feat dim: 9)
+    table          :     3 nodes  (feat dim: 9)
+
+  Edge Types:
+    page-[contains]->figure         :     1 edges
+    page-[contains]->section        :     3 edges
+    page-[contains]->text           :     6 edges
+    page-[contains]->table          :     3 edges
+    figure-[reading_order]->section        :     1 edges
+    section-[reading_order]->table          :     1 edges
+    table-[reading_order]->section        :     1 edges
+    section-[reading_order]->text           :     2 edges
+    text-[reading_order]->section        :     1 edges
+    text-[reading_order]->text           :     3 edges
+    text-[reading_order]->table          :     1 edges
+    table-[reading_order]->table          :     1 edges
+    table-[reading_order]->text           :     1 edges
+    figure-[spatial]->section        :     2 edges
+    section-[spatial]->figure         :     2 edges
+    figure-[spatial]->text           :     1 edges
+    text-[spatial]->figure         :     1 edges
+    section-[spatial]->text           :     4 edges
+    text-[spatial]->section        :     4 edges
+    section-[spatial]->section        :     2 edges
+    text-[spatial]->text           :    16 edges
+    table-[spatial]->text           :     3 edges
+    text-[spatial]->table          :     3 edges
+    table-[spatial]->table          :     6 edges
+    section-[spatial]->table          :     3 edges
+    table-[spatial]->section        :     3 edges
+    section-[parent_child]->table          :     3 edges
+    section-[parent_child]->text           :     6 edges
+
+  Degree Statistics:
+    Overall Avg Degree : 6.00
+    Avg Degree (contains    ) : 0.93
+    Avg Degree (reading_order) : 0.86
+    Avg Degree (spatial     ) : 3.57
+    Avg Degree (parent_child) : 0.64
+
+------------------------------------------------------------
+  Total nodes : 14
+  Total edges : 84
+============================================================
+
+  ✓  data.validate() passed
+
+  [5/5] Saving outputs...
+  ✓  Graph saved  : experiments\Invoice_Sample_graph.pt
+  ✓  Reload check : OK (5 node types)
+
++======================================================+
+|  Done in 40.2s                                       |
++======================================================+
+
+
+
