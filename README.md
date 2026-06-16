@@ -149,8 +149,36 @@ python build_graph.py --help
 
 ## Roadmap
 
-- **Phase 1** ✅ Multi-Modal Parsing & Graph Extraction ← *you are here*
+- **Phase 1** ✅ Multi-Modal Parsing & Graph Extraction
+- **Phase 1.5** ✅ Graph Semantics, Explainability & Baseline Validation ← *you are here*
 - **Phase 2** 🔲 Qwen2.5-VL Encoding & Token Compression
 - **Phase 3** 🔲 HDGT GNN (Disentangled Spatial-Semantic Attention)
 - **Phase 4** 🔲 ALR Data Distillation & Supervised Fine-Tuning
 - **Phase 5** 🔲 Hybrid Retrieval & Benchmark Evaluation
+
+---
+
+## Phase 1.5 Results
+
+Seven documents evaluated across 4 domains (academic papers, pitch decks, invoices, forms):
+
+| Document | Pages | Nodes | Edges | Avg Degree |
+|----------|------:|------:|------:|-----------:|
+| TFMAdapter | 10 | 231 | 1,411 | 6.11 |
+| Bahri_TTA | 10 | 134 | 771 | 5.75 |
+| Open-YOLO3D | 20 | 191 | 1,037 | 5.43 |
+| Segment Tracking | 10 | 165 | 987 | 5.98 |
+| Pitch Deck | 16 | 112 | 609 | 5.44 |
+| Survey Form | 1 | 23 | 147 | 6.39 |
+| Invoice | 1 | 14 | 84 | 6.00 |
+
+**Reference edge precision**: Figure-caption 100% (n=10) · In-text regex 90% (n=20)
+
+**Deliverables** — see `phase1_5_results/`:
+- `graph_construction_walkthrough.png` — 4-panel PDF → Graph figure
+- `edge_semantics_figure.png` — Edge type semantic diagram
+- `graph_stats_figure.png` — Statistics across all documents
+- `retrieval_comparison_figure.png` — HDGT vs flat retrieval
+- `baseline_comparison.md` — 10-method capability matrix
+- `retrieval_protocol.md` — MP-DocVQA benchmark protocol
+- `hdgt_technical_report.md` — Full Phase 1.5 technical report
