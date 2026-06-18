@@ -79,6 +79,29 @@ python build_graph.py data/paper.pdf --doc-id arxiv_2401_00001 --output experime
 python build_graph.py --help
 ```
 
+---
+
+## Running MP-DocVQA Experiment (Phase 1.5 Batch Build)
+
+To run the graph construction experiment for the **MP-DocVQA** dataset, follow these steps:
+
+1. **Download the Dataset**: Download the `Images` and `Questions and Answers` archives (or use the pre-downloaded validation QA zip at `data/MP-DocVQA/qas.zip`) from the [CVC RRC portal](https://rrc.cvc.uab.es/?ch=17).
+2. **Setup Folder Structure**: Extract the images zip so that all page images are located under `data/MP-DocVQA/images/`.
+3. **Preprocess and Compile PDFs**:
+   ```bash
+   python prepare_mpdocvqa.py
+   ```
+   This unzips the QA files, groups page images by question contexts, compiles them into multi-page PDFs, and creates `context_map.json`.
+4. **Batch Construct Graphs**:
+   ```bash
+   python build_mpdocvqa_graphs.py
+   ```
+   This parses all compiled PDFs and builds their HeteroData graphs, saving them in `experiments/mpdocvqa/`.
+
+For detailed setup instructions, see [instructions_mpdocvqa.md](file:///c:/Users/abhin/OneDrive/Documents/GitHub/HDGT/instructions_mpdocvqa.md).
+
+---
+
 ### Expected output
 
 ```
